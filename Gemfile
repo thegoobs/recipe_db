@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'nested_form_fields'
+gem 'carrierwave', '~> 1.1'
 
 group :development, :test do
 
