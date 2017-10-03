@@ -1,9 +1,14 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user!
   # GET /recipes
   # GET /recipes.json
   def index
+    @recipes = Recipe.all
+  end
+
+  def private_index
     @recipes = Recipe.all
   end
 
@@ -24,7 +29,7 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipe_params.merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @recipe.save
@@ -69,6 +74,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:remove_image, :image, :title, :description, ingredients_attributes:[:id, :content, :_destroy], steps_attributes:[:id, :direction, :_destroy])
+      params.require(:recipe).permit(:private, :UserID, :remove_image, :image, :title, :description, ingredients_attributes:[:id, :content, :_destroy], steps_attributes:[:id, :direction, :_destroy])
     end
 end

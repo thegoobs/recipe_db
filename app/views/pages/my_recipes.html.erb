@@ -1,0 +1,64 @@
+<div class="container">
+
+  <h1>Your Recipes</h1>
+  
+  <%= link_to 'New Recipe', new_recipe_path %>
+
+
+  <div class="row">
+    <h2>Public</h2>
+    <% @recipes.each do |recipe| %>
+      <% if recipe.user_id == current_user.id and recipe.private == false %>
+        <div class="col-md-4">
+          <div class="recipe-box">
+            <% if recipe.image? %>
+              <%= link_to (image_tag recipe.image.url, class: "recipe-index"), recipe %>
+            <% end %>
+            <ul>
+              <li><%= recipe.title %></li>
+              <li>created by: <%= User.find(recipe.user_id).name %>
+              <li><%= recipe.description %></li>
+              <% if recipe.private %>
+                <li>Private</li>
+              <% else %>
+                <li>Public</li>
+              <% end %>
+              <li><%= link_to 'Show', recipe %> |
+              <%= link_to 'Edit', edit_recipe_path(recipe) %> |
+              <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div> <!-- row close -->
+
+  <div class="row">
+    <h2>Private</h2>
+    <% @recipes.each do |recipe| %>
+      <% if recipe.user_id == current_user.id and recipe.private == true %>
+        <div class="col-md-4">
+          <div class="recipe-box">
+            <% if recipe.image? %>
+              <%= link_to (image_tag recipe.image.url, class: "recipe-index"), recipe %>
+            <% end %>
+            <ul>
+              <li><%= recipe.title %></li>
+              <li>created by: <%= User.find(recipe.user_id).name %>
+              <li><%= recipe.description %></li>
+              <% if recipe.private %>
+                <li>Private</li>
+              <% else %>
+                <li>Public</li>
+              <% end %>
+              <li><%= link_to 'Show', recipe %> |
+              <%= link_to 'Edit', edit_recipe_path(recipe) %> |
+              <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div> <!-- row close -->
+  <br>
+</div>

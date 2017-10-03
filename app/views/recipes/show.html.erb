@@ -1,35 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<p id="notice"><%= notice %></p>
 
-<% if @recipe.image? %>
-	<%= image_tag @recipe.image.url, class: "recipe-show" %>
-<% end %>
+	<% if @recipe.image? %>
+		<%= image_tag @recipe.image.url, class: "recipe-show" %>
+	<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
+	<h1>
+	  <strong>Title:</strong>
+	  <%= @recipe.title %>
+	</h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @recipe.description %>
-</p>
+	<p>
+	  <strong>Description:</strong>
+	  <%= @recipe.description %>
+	</p>
 
-<h2>Ingredients</h2>
-	<ul>
-		<% for @ingredient in @recipe.ingredients %>
-			<li>
-				<%= @ingredient.content %>
-			</li>
-		<% end %>
-	</ul>
+	<h2>Ingredients</h2>
+		<ul>
+			<% for @ingredient in @recipe.ingredients %>
+				<li>
+					<%= @ingredient.content %>
+				</li>
+			<% end %>
+		</ul>
 
-<h2>Steps</h2>
-	<ol>
-		<% for @step in @recipe.steps %>
-			<li>
-				<%= @step.direction %>
-			</li>
-		<% end %>
-	</ol>
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+	<h2>Steps</h2>
+		<ol>
+			<% for @step in @recipe.steps %>
+				<li>
+					<%= @step.direction %>
+				</li>
+			<% end %>
+		</ol>
+	<% if @recipe.user_id == current_user.id %>
+		<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+	<% end %>
+	<%= link_to 'Back', recipes_path %>
+</div>
