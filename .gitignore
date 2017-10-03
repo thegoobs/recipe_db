@@ -20,4 +20,7 @@
 /node_modules
 /yarn-error.log
 
+#ignore csv file
+*.csv
+
 .byebug_history
