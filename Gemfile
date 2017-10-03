@@ -19,6 +19,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7' #styling gem
 gem 'nested_form_fields'
 gem 'carrierwave', '~> 1.1'
 gem 'devise', '~> 4.3' #authentication gem
+gem 'fog-aws'
 
 
 group :production do
